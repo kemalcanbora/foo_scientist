@@ -91,3 +91,4 @@ if __name__ == '__main__':
      id_rsa_copy_to_slaves()
      copy_hosts_file_to_all_machines()
      install_spark_all_machines()
+     copy_hosts_file_to_all_machines(copy_done=True)
