@@ -8,7 +8,7 @@ Cluster Manager
 ![alt text](https://miro.medium.com/max/534/1*o80WzWJShjCV1RSfWzCiQA.png)
 
 Sometimes architecture can be hard to build for this there are solutions such as cloudera etc. I wanted to do it my way.
-All you have to do is edit the json file yourself it's name is **architecture.json**
+All you have to do is edit the json file yourself it's name is **architecture.json** and run mimar.py
 
 <h2>Note:</h2> Don't change type in json file and if you add another slave in json file just add new number end of the name like 
 hadoop_slave_2, hadoop_slave_3 .. 
