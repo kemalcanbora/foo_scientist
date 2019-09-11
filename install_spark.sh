@@ -13,3 +13,7 @@ echo -e "\n" >> ~/.bashrc
 echo '''export SPARK_HOME=/opt/spark''' >> ~/.bashrc
 echo '''export PATH=$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin''' >> ~/.bashrc
 source ~/.bashrc
+cd /opt/spark/conf
+cp spark-env.sh.template spark-env.sh
+echo '''export SPARK_MASTER_HOST=hadoop_master_mimar''' >> spark-env.sh
+cp slaves.template slaves

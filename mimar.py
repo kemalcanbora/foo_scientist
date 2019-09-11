@@ -14,7 +14,7 @@ def read_json():
     return data
 
 
-def copy_hosts_file_to_all_machines():
+def copy_hosts_file_to_all_machines(copy_done=None):
     data = read_json()
 
     for item in data:
@@ -34,6 +34,17 @@ def copy_hosts_file_to_all_machines():
                     machine_hosts_for_slave)
 
                 subprocess.call(query_for_slaver, shell=True)
+
+
+        if copy_done == True:
+            query_for_slaver = '''sshpass -p {} ssh {}@{} "echo {} | sudo -S -- sh -c 'echo {} >> /opt/spark/conf/slaves'" '''.format(
+                item["password"],
+                item["username"],
+                item["IP"],
+                item["password"],
+                item["name"])
+
+            subprocess.call(query_for_slaver, shell=True)
 
 
 def id_rsa_copy_to_slaves():
@@ -56,8 +67,7 @@ def install_spark_all_machines():
         if machine["type"] == "hadoop-master":
             subprocess.call("chmod +x install_spark.sh", shell=True)
             subprocess.call("echo {} | sudo -S ./install_spark.sh".format(machine["password"]), shell=True)
-            subprocess.call("chmod +x ./run_spark.sh")
-            subprocess.call("./run_spark.sh")
+
 
         elif machine["type"] == "hadoop-slave":
             path = os.getcwd()
@@ -77,8 +87,7 @@ def install_spark_all_machines():
                                                                                 machine["IP"]), shell=True)
 
 
-id_rsa_copy_to_slaves()
-# if __name__ == '__main__':
-#     copy_hosts_file_to_all_machines()
-#     id_rsa_copy_to_slaves()
-#     install_spark_all_machines()
+if __name__ == '__main__':
+     id_rsa_copy_to_slaves()
+     copy_hosts_file_to_all_machines()
+     install_spark_all_machines()
