@@ -66,6 +66,9 @@ def spark_sh_install():
             subprocess.call("echo {} | sudo -S -- sh -c 'echo export SPARK_MASTER_HOST={} >> /opt/spark/conf/spark-env.sh'".format(machine["password"], machine["IP"]), shell=True)
             subprocess.call("echo {} | sudo -S -- sh -c 'echo export SPARK_MASTER_IP={} >> /opt/spark/conf/spark-env.sh'".format(machine["password"], machine["IP"]), shell=True)
             subprocess.call("echo {} | sudo -S -- sh -c 'echo export JAVA_HOME={} >> /opt/spark/conf/spark-env.sh'".format(machine["password"], java_path), shell=True)
+            subprocess.call("echo {} | sudo -S -- sh -c 'echo export SPARK_LOCAL_HOSTNAME=localhost >> /opt/spark/conf/spark-env.sh'".format(machine["password"], java_path), shell=True)
+
+
             generate_slave_file()
 
         if machine["type"] == "hadoop-slave":
